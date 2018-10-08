@@ -6,7 +6,7 @@ Comment
 
 ---
 
-(script
+(ERROR
   (comment))
 
 ============================================
@@ -17,7 +17,7 @@ integer foo = 42;
 
 ---
 
-(script
+(ERROR
   (variable_declaration
     (type_name)
     (identifier)
@@ -33,7 +33,7 @@ float foo = .42;
 
 ---
 
-(script
+(ERROR
   (variable_declaration
     (type_name)
     (identifier)
@@ -57,7 +57,7 @@ string foo = "";
 
 ---
 
-(script
+(ERROR
   (variable_declaration
     (type_name)
     (identifier)
@@ -71,7 +71,7 @@ string foo = "foo bar";
 
 ---
 
-(script
+(ERROR
   (variable_declaration
     (type_name)
     (identifier)
@@ -85,7 +85,7 @@ string foo = "foo \" \n bar";
 
 ---
 
-(script
+(ERROR
   (variable_declaration
     (type_name)
     (identifier)
@@ -99,7 +99,7 @@ list foo = [];
 
 ---
 
-(script
+(ERROR
   (variable_declaration
     (type_name)
     (identifier)
@@ -114,7 +114,7 @@ list foo = [42, 34, 25];
 
 ---
 
-(script
+(ERROR
   (variable_declaration
     (type_name)
     (identifier)
@@ -135,7 +135,7 @@ vector foo = <42, 42, 42>;
 
 ---
 
-(script
+(ERROR
   (variable_declaration
     (type_name)
     (identifier)
@@ -152,7 +152,7 @@ rotation foo = <42, 42, 42, 42>;
 
 ---
 
-(script
+(ERROR
   (variable_declaration
     (type_name)
     (identifier)

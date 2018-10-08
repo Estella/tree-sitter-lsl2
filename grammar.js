@@ -4,7 +4,12 @@ module.exports = grammar({
   extras: $ => [$.comment, /\s/],
 
   rules: {
-    script: $ => seq(repeat($._global_declaration)),
+    script: $ =>
+      seq(
+        repeat($._global_declaration),
+        $.default_state,
+        repeat($.state_declaration)
+      ),
     _global_declaration: $ =>
       choice($.variable_declaration, $.function_declaration),
     _expression: $ => choice($.identifier, $._literal),
@@ -22,6 +27,15 @@ module.exports = grammar({
     function_parameters: $ =>
       seq("(", commaSeparated(seq($.type_name, $.identifier)), ")"),
     statement_block: $ => seq("{", repeat($._statement), "}"),
+
+    default_state: $ => seq("default", $.event_block),
+    state_declaration: $ => seq("state", $.identifier, $.event_block),
+    event_block: $ =>
+      seq(
+        "{",
+        repeat(seq($.identifier, $.function_parameters, $.statement_block)),
+        "}"
+      ),
 
     // Literals
     _literal: $ =>

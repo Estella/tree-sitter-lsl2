@@ -1,0 +1,72 @@
+============================================
+Empty default state
+============================================
+
+default {
+}
+
+---
+
+(script
+  (default_state (event_block)))
+
+============================================
+Default state
+============================================
+
+default {
+  touch_start(integer n) {
+  }
+}
+
+---
+
+(script
+  (default_state
+    (event_block
+      (identifier)
+      (function_parameters
+        (type_name)
+        (identifier))
+      (statement_block))))
+
+============================================
+Empty state declaration
+============================================
+
+default {}
+
+state foo {
+}
+
+---
+
+(script
+  (default_state (event_block))
+  (state_declaration
+    (identifier)
+    (event_block)))
+
+============================================
+State declaration
+============================================
+
+default {}
+
+state foo {
+  touch_start(integer n) {
+  }
+}
+
+---
+
+(script
+  (default_state (event_block))
+  (state_declaration
+    (identifier)
+    (event_block
+      (identifier)
+      (function_parameters
+        (type_name)
+        (identifier))
+      (statement_block))))
