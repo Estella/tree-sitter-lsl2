@@ -37,6 +37,52 @@ integer foo = bar;
     (identifier)))
 
 ============================================
+Function declaration
+============================================
+
+foo(){}
+
+---
+(script
+  (function_declaration
+    (identifier)
+    (function_parameters)
+    (statement_block)))
+
+============================================
+Function declaration with return type
+============================================
+
+integer foo(){}
+
+---
+(script
+  (function_declaration
+    (type_name)
+    (identifier)
+    (function_parameters)
+    (statement_block)))
+
+============================================
+Function declaration with body
+============================================
+
+foo() {
+  integer bar = 42;
+}
+
+---
+(script
+  (function_declaration
+    (identifier)
+    (function_parameters)
+    (statement_block
+      (variable_declaration
+        (type_name)
+        (identifier)
+        (integer_literal)))))
+
+============================================
 Integer literal
 ============================================
 
