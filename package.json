@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tree-sitter generate && node-gyp build",
     "clean": "rm -r build/ src/ binding.gyp",
-    "test": "tree-sitter test"
+    "test": "npm run build && tree-sitter test"
   },
   "repository": {
     "type": "git",

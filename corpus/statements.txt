@@ -7,4 +7,17 @@ Comments
 ---
 
 (script
-    (comment))
+  (comment))
+
+============================================
+Simple variable declarations
+============================================
+
+integer foo;
+
+---
+
+(script
+  (variable_declaration
+    (type_name)
+    (identifier)))
