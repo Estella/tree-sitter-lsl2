@@ -1,5 +1,5 @@
 ============================================
-Comments
+Comment
 ============================================
 
 // This is a comment
@@ -10,7 +10,7 @@ Comments
   (comment))
 
 ============================================
-Simple variable declarations
+Simple variable declaration
 ============================================
 
 integer foo;
@@ -21,3 +21,156 @@ integer foo;
   (variable_declaration
     (type_name)
     (identifier)))
+
+============================================
+Variable declaration
+============================================
+
+integer foo = 42;
+
+---
+
+(script
+  (variable_declaration
+    (type_name)
+    (identifier)
+    (integer_literal)))
+
+============================================
+Float literals
+============================================
+
+float foo = 42.;
+float foo = 42.42;
+float foo = .42;
+
+---
+
+(script
+  (variable_declaration
+    (type_name)
+    (identifier)
+    (float_literal))
+  (variable_declaration
+    (type_name)
+    (identifier)
+    (float_literal))
+  (variable_declaration
+    (type_name)
+    (identifier)
+    (float_literal)))
+
+
+
+============================================
+Empty string literal
+============================================
+
+string foo = "";
+
+---
+
+(script
+  (variable_declaration
+    (type_name)
+    (identifier)
+    (string_literal)))
+
+============================================
+String literal
+============================================
+
+string foo = "foo bar";
+
+---
+
+(script
+  (variable_declaration
+    (type_name)
+    (identifier)
+    (string_literal)))
+
+============================================
+String literal with escape sequences
+============================================
+
+string foo = "foo \" \n bar";
+
+---
+
+(script
+  (variable_declaration
+    (type_name)
+    (identifier)
+    (string_literal)))
+
+============================================
+Empty list literal
+============================================
+
+list foo = [];
+
+---
+
+(script
+  (variable_declaration
+    (type_name)
+    (identifier)
+    (list_literal)))
+
+============================================
+List literal
+============================================
+
+list foo = [42];
+list foo = [42, 34, 25];
+
+---
+
+(script
+  (variable_declaration
+    (type_name)
+    (identifier)
+    (list_literal (integer_literal)))
+  (variable_declaration
+    (type_name)
+    (identifier)
+    (list_literal
+      (integer_literal)
+      (integer_literal)
+      (integer_literal))))
+
+============================================
+Vector literal
+============================================
+
+vector foo = <42, 42, 42>;
+
+---
+
+(script
+  (variable_declaration
+    (type_name)
+    (identifier)
+    (vector_literal
+      (integer_literal)
+      (integer_literal)
+      (integer_literal))))
+
+============================================
+Quaternion literal
+============================================
+
+rotation foo = <42, 42, 42, 42>;
+
+---
+
+(script
+  (variable_declaration
+    (type_name)
+    (identifier)
+    (quaternion_literal
+      (integer_literal)
+      (integer_literal)
+      (integer_literal)
+      (integer_literal))))
