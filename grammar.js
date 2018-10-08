@@ -6,7 +6,7 @@ module.exports = grammar({
   rules: {
     script: $ => seq(repeat($._global)),
     _global: $ => choice($.variable_declaration),
-    _expression: $ => choice($._literal),
+    _expression: $ => choice($.identifier, $._literal),
 
     variable_declaration: $ =>
       seq($.type_name, $.identifier, optional(seq("=", $._expression)), ";"),

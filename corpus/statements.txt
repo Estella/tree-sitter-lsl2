@@ -26,6 +26,20 @@ integer foo;
 Variable declaration
 ============================================
 
+integer foo = bar;
+
+---
+
+(script
+  (variable_declaration
+    (type_name)
+    (identifier)
+    (identifier)))
+
+============================================
+Integer literal
+============================================
+
 integer foo = 42;
 
 ---
