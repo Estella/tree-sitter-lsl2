@@ -32,6 +32,7 @@ Function declaration
 foo(){}
 
 ---
+
 (ERROR
   (function_declaration
     (identifier)
@@ -45,6 +46,7 @@ Function declaration with return type
 integer foo(){}
 
 ---
+
 (ERROR
   (function_declaration
     (type_name)
@@ -61,6 +63,7 @@ foo() {
 }
 
 ---
+
 (ERROR
   (function_declaration
     (identifier)
