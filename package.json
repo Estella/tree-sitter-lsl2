@@ -1,0 +1,34 @@
+{
+  "name": "tree-sitter-lsl",
+  "version": "0.0.1",
+  "description": "Tree-sitter parser for Linden Scripting Language.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tree-sitter generate && node-gyp build",
+    "clean": "rm -r build/ src/ binding.gyp",
+    "test": "tree-sitter test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jomik/tree-sitter-lsl.git"
+  },
+  "keywords": [
+    "tree-sitter",
+    "lsl",
+    "parser",
+    "lexer"
+  ],
+  "author": "Jonas Holst Damtoft",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Jomik/tree-sitter-lsl/issues"
+  },
+  "homepage": "https://github.com/Jomik/tree-sitter-lsl#readme",
+  "dependencies": {
+    "nan": "^2.11.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.14.3",
+    "tree-sitter-cli": "^0.13.10"
+  }
+}
