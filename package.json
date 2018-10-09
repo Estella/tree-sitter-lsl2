@@ -4,7 +4,6 @@
   "description": "Tree-sitter parser for Linden Scripting Language.",
   "main": "index.js",
   "files": [
-    "grammar.js",
     "build/Release/*"
   ],
   "scripts": {
