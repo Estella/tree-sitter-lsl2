@@ -1,3 +1,14 @@
+const PREC = {
+  OR: 1,
+  AND: 2,
+  PLUS: 3,
+  REL: 4,
+  TIMES: 5,
+  NOT: 6,
+  NEG: 7,
+  UPD: 8
+};
+
 module.exports = grammar({
   name: "lsl",
 
@@ -12,8 +23,22 @@ module.exports = grammar({
       ),
     _global_declaration: $ =>
       choice($.variable_declaration, $.function_declaration),
-    _expression: $ => choice($.identifier, $._literal),
-    _statement: $ => choice($.variable_declaration, $._expression),
+    _expression: $ =>
+      choice(
+        $.identifier,
+        $._literal,
+        $.unary_expression,
+        $.binary_expression,
+        $.update_expression
+      ),
+    _statement: $ =>
+      prec.right(
+        choice(
+          $.variable_declaration,
+          seq($._expression, ";"),
+          $.return_statement
+        )
+      ),
 
     variable_declaration: $ =>
       seq($.type_name, $.identifier, optional(seq("=", $._expression)), ";"),
@@ -35,6 +60,59 @@ module.exports = grammar({
         "{",
         repeat(seq($.identifier, $.function_parameters, $.statement_block)),
         "}"
+      ),
+
+    return_statement: $ => seq("return", optional($._expression), ";"),
+
+    // Expressions
+    unary_expression: $ =>
+      choice(
+        ...[["!", PREC.NOT], ["~", PREC.NOT], ["-", PREC.NEG]].map(
+          ([operator, precedence]) =>
+            prec.left(precedence, seq(operator, $._expression))
+        )
+      ),
+
+    binary_expression: $ =>
+      choice(
+        ...[
+          ["&&", PREC.AND],
+          ["||", PREC.OR],
+          [">>", PREC.TIMES],
+          ["<<", PREC.TIMES],
+          ["&", PREC.AND],
+          ["^", PREC.OR],
+          ["|", PREC.OR],
+          ["+", PREC.PLUS],
+          ["-", PREC.PLUS],
+          ["*", PREC.TIMES],
+          ["/", PREC.TIMES],
+          ["%", PREC.TIMES],
+          ["<", PREC.REL],
+          ["<=", PREC.REL],
+          ["==", PREC.REL],
+          ["!=", PREC.REL],
+          [">=", PREC.REL],
+          [">", PREC.REL]
+        ].map(([operator, precedence]) =>
+          prec.left(precedence, seq($._expression, operator, $._expression))
+        )
+      ),
+
+    update_expression: $ =>
+      prec.left(
+        PREC.UPD,
+        choice(
+          seq($._lvalue, "++"),
+          seq($._lvalue, "--"),
+          seq("++", $._lvalue),
+          seq("--", $._lvalue),
+          seq($._lvalue, "+=", $._expression),
+          seq($._lvalue, "-=", $._expression),
+          seq($._lvalue, "*=", $._expression),
+          seq($._lvalue, "/=", $._expression),
+          seq($._lvalue, "%=", $._expression)
+        )
       ),
 
     // Literals
@@ -67,6 +145,8 @@ module.exports = grammar({
       ),
 
     identifier: $ => /[_A-Za-z]\w*/,
+    _lvalue: $ =>
+      choice($.identifier, seq($.identifier, ".", choice("x", "y", "z", "s"))),
     comment: $ => /\/\/.*/,
 
     type_name: $ =>

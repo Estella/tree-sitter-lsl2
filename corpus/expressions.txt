@@ -1,0 +1,55 @@
+============================================
+Binary expression
+============================================
+
+foo() {
+  42 + 42;
+}
+
+---
+
+(ERROR
+  (function_declaration
+    (identifier)
+    (function_parameters)
+    (statement_block
+      (binary_expression
+        (integer_literal)
+        (integer_literal)))))
+
+============================================
+Unary expression
+============================================
+
+foo() {
+  !42;
+}
+
+---
+
+(ERROR
+  (function_declaration
+    (identifier)
+    (function_parameters)
+    (statement_block
+      (unary_expression
+        (integer_literal)))))
+
+============================================
+Update expression
+============================================
+
+foo() {
+  bar += 42;
+}
+
+---
+
+(ERROR
+  (function_declaration
+    (identifier)
+    (function_parameters)
+    (statement_block
+      (update_expression
+        (identifier)
+        (integer_literal)))))

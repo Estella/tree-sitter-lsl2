@@ -1,0 +1,16 @@
+============================================
+Function return statement
+============================================
+
+foo() {
+  return;
+}
+
+---
+
+(ERROR
+  (function_declaration
+    (identifier)
+    (function_parameters)
+    (statement_block
+      (return_statement))))
