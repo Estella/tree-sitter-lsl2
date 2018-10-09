@@ -10,7 +10,7 @@ const PREC = {
 };
 
 module.exports = grammar({
-  name: "lsl",
+  name: "lsl2",
 
   extras: $ => [$.comment, /\s/],
 
