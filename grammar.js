@@ -38,6 +38,8 @@ module.exports = grammar({
         ";",
         $.statement_block,
         $.return_statement,
+        $.jump_statement,
+        $.label_statement,
         $.if_statement,
         $.while_statement,
         $.do_statement,
@@ -85,6 +87,9 @@ module.exports = grammar({
         commaSeparated($._expression),
         ")"
       ),
+
+    jump_statement: $ => seq("jump", $.identifier, ";"),
+    label_statement: $ => seq("@", $.identifier, ";"),
 
     default_state: $ => seq("default", $.event_block),
     state_declaration: $ => seq("state", $.identifier, $.event_block),
