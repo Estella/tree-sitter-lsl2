@@ -132,3 +132,43 @@ foo() {
           (binary_expression
             (integer_literal)
             (integer_literal)))))))
+
+============================================
+Empty function call expression
+============================================
+
+foo() {
+  bar();
+}
+
+---
+
+(ERROR
+  (function_declaration
+    (identifier)
+    (function_signature)
+    (statement_block
+      (function_call_expression
+        (identifier)
+        (function_arguments)))))
+
+============================================
+Function call expression
+============================================
+
+foo() {
+  bar(42, 42);
+}
+
+---
+
+(ERROR
+  (function_declaration
+    (identifier)
+    (function_signature)
+    (statement_block
+      (function_call_expression
+        (identifier)
+        (function_arguments
+          (integer_literal)
+          (integer_literal))))))

@@ -31,7 +31,8 @@ module.exports = grammar({
         $.unary_expression,
         $.binary_expression,
         $.update_expression,
-        $.typecast_expression
+        $.typecast_expression,
+        $.function_call_expression
       ),
     _statement: $ =>
       choice(
@@ -169,6 +170,9 @@ module.exports = grammar({
           alias($._postfix_update, $.update_expression)
         )
       ),
+
+    function_call_expression: $ => seq($.identifier, $.function_arguments),
+    function_arguments: $ => seq("(", commaSeparated($._expression), ")"),
 
     // Literals
     _literal: $ =>
