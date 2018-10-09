@@ -35,7 +35,9 @@ module.exports = grammar({
       choice(
         $.variable_declaration,
         seq($._expression, ";"),
-        $.return_statement
+        $.statement_block,
+        $.return_statement,
+        $.if_statement
       ),
 
     variable_declaration: $ =>
@@ -50,6 +52,18 @@ module.exports = grammar({
     function_parameters: $ =>
       seq("(", commaSeparated(seq($.type_name, $.identifier)), ")"),
     statement_block: $ => seq("{", repeat($._statement), "}"),
+
+    // Control statements
+    if_statement: $ =>
+      prec.right(
+        seq(
+          "if",
+          $.parenthesized_expression,
+          seq($._statement, optional(seq("else", $._statement)))
+        )
+      ),
+
+    parenthesized_expression: $ => seq("(", $._expression, ")"),
 
     default_state: $ => seq("default", $.event_block),
     state_declaration: $ => seq("state", $.identifier, $.event_block),
@@ -105,6 +119,7 @@ module.exports = grammar({
           seq($._lvalue, "--"),
           seq("++", $._lvalue),
           seq("--", $._lvalue),
+          seq($._lvalue, "=", $._expression),
           seq($._lvalue, "+=", $._expression),
           seq($._lvalue, "-=", $._expression),
           seq($._lvalue, "*=", $._expression),

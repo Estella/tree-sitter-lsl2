@@ -14,3 +14,91 @@ foo() {
     (function_parameters)
     (statement_block
       (return_statement))))
+
+============================================
+Simple if statement
+============================================
+
+foo() {
+  if (bar > 2) bar = 2;
+}
+
+---
+
+(ERROR
+  (function_declaration
+    (identifier)
+    (function_parameters)
+    (statement_block
+      (if_statement
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (integer_literal)))
+        (update_expression
+          (identifier)
+          (integer_literal))))))
+
+============================================
+Simple if-else statement
+============================================
+
+foo() {
+  if (bar > 2) bar = 2;
+  else bar = 0;
+}
+
+---
+
+(ERROR
+  (function_declaration
+    (identifier)
+    (function_parameters)
+    (statement_block
+      (if_statement
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (integer_literal)))
+        (update_expression
+          (identifier)
+          (integer_literal))
+        (update_expression
+          (identifier)
+          (integer_literal))))))
+============================================
+Chain else-if statement
+============================================
+
+foo() {
+  if (bar > 2) bar = 2;
+  else if (bar < 0) bar = 0;
+  else bar = -1;
+}
+
+---
+
+(ERROR
+  (function_declaration
+    (identifier)
+    (function_parameters)
+    (statement_block
+      (if_statement
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (integer_literal)))
+        (update_expression
+          (identifier)
+          (integer_literal))
+        (if_statement
+          (parenthesized_expression
+            (binary_expression
+              (identifier)
+              (integer_literal)))
+          (update_expression
+            (identifier)
+            (integer_literal))
+          (update_expression
+            (identifier)
+            (unary_expression (integer_literal))))))))
