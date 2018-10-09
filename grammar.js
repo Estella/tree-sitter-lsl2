@@ -35,9 +35,13 @@ module.exports = grammar({
       choice(
         $.variable_declaration,
         seq($._expression, ";"),
+        ";",
         $.statement_block,
         $.return_statement,
-        $.if_statement
+        $.if_statement,
+        $.while_statement,
+        $.do_statement,
+        $.for_statement
       ),
 
     variable_declaration: $ =>
@@ -54,6 +58,8 @@ module.exports = grammar({
     statement_block: $ => seq("{", repeat($._statement), "}"),
 
     // Control statements
+    return_statement: $ => seq("return", optional($._expression), ";"),
+
     if_statement: $ =>
       prec.right(
         seq(
@@ -62,8 +68,23 @@ module.exports = grammar({
           seq($._statement, optional(seq("else", $._statement)))
         )
       ),
+    while_statement: $ =>
+      seq("while", $.parenthesized_expression, $._statement),
+    do_statement: $ =>
+      seq("do", $._statement, "while", $.parenthesized_expression, ";"),
+    for_statement: $ => seq("for", $.for_signature, $._statement),
 
     parenthesized_expression: $ => seq("(", $._expression, ")"),
+    for_signature: $ =>
+      seq(
+        "(",
+        commaSeparated($._expression),
+        ";",
+        $._expression,
+        ";",
+        commaSeparated($._expression),
+        ")"
+      ),
 
     default_state: $ => seq("default", $.event_block),
     state_declaration: $ => seq("state", $.identifier, $.event_block),
@@ -73,8 +94,6 @@ module.exports = grammar({
         repeat(seq($.identifier, $.function_parameters, $.statement_block)),
         "}"
       ),
-
-    return_statement: $ => seq("return", optional($._expression), ";"),
 
     // Expressions
     unary_expression: $ =>

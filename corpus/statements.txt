@@ -102,3 +102,73 @@ foo() {
           (update_expression
             (identifier)
             (unary_expression (integer_literal))))))))
+
+
+============================================
+While statement
+============================================
+
+foo() {
+  while(0) 2;
+}
+
+---
+
+(ERROR
+  (function_declaration
+    (identifier)
+    (function_parameters)
+    (statement_block
+      (while_statement
+        (parenthesized_expression
+          (integer_literal))
+        (integer_literal)))))
+
+============================================
+Do-while statement
+============================================
+
+foo() {
+  do 2;
+  while(0);
+}
+
+---
+
+(ERROR
+  (function_declaration
+    (identifier)
+    (function_parameters)
+    (statement_block
+      (do_statement
+        (integer_literal)
+        (parenthesized_expression
+          (integer_literal))))))
+
+============================================
+For statement
+============================================
+
+foo() {
+  for(i = 0; i < 10; ++i) {
+  }
+}
+
+---
+
+(ERROR
+  (function_declaration
+    (identifier)
+    (function_parameters)
+    (statement_block
+      (for_statement
+        (for_signature
+          (update_expression
+            (identifier)
+            (integer_literal))
+          (binary_expression
+            (identifier)
+            (integer_literal))
+          (update_expression
+            (identifier)))
+          (statement_block)))))
