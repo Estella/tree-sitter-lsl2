@@ -193,3 +193,21 @@ foo() {
         (identifier))
       (label_statement
         (identifier)))))
+
+============================================
+Jump label
+============================================
+
+foo() {
+  state bar;
+}
+
+---
+
+(ERROR
+  (function_declaration
+    (identifier)
+    (function_parameters)
+    (statement_block
+      (state_statement
+        (identifier)))))
