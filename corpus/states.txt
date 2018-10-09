@@ -7,7 +7,7 @@ default {
 
 ---
 
-(script
+(program
   (default_state (event_block)))
 
 ============================================
@@ -21,7 +21,7 @@ default {
 
 ---
 
-(script
+(program
   (default_state
     (event_block
       (identifier)
@@ -41,7 +41,7 @@ state foo {
 
 ---
 
-(script
+(program
   (default_state (event_block))
   (state_declaration
     (identifier)
@@ -60,7 +60,7 @@ state foo {
 
 ---
 
-(script
+(program
   (default_state (event_block))
   (state_declaration
     (identifier)

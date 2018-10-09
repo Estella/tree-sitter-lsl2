@@ -15,7 +15,7 @@ module.exports = grammar({
   extras: $ => [$.comment, /\s/],
 
   rules: {
-    script: $ =>
+    program: $ =>
       seq(
         repeat($._global_declaration),
         $.default_state,
