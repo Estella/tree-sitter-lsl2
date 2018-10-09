@@ -1,12 +1,17 @@
 {
   "name": "tree-sitter-lsl",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Tree-sitter parser for Linden Scripting Language.",
   "main": "index.js",
+  "files": [
+    "build/Release/*"
+  ],
   "scripts": {
-    "build": "tree-sitter generate && node-gyp build",
-    "clean": "rm -r build/ src/ binding.gyp",
-    "test": "npm run build && tree-sitter test"
+    "build": "tree-sitter generate && node-gyp configure && node-gyp build",
+    "clean": "rm -rf build/ src/ binding.gyp",
+    "test": "npm run build && tree-sitter test",
+    "prepare": "npm run clean && npm run build",
+    "release": "np"
   },
   "repository": {
     "type": "git",
@@ -28,6 +33,7 @@
     "nan": "^2.11.1"
   },
   "devDependencies": {
+    "np": "^3.0.4",
     "prettier": "^1.14.3",
     "tree-sitter-cli": "^0.13.10"
   }
