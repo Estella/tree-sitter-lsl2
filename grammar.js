@@ -27,9 +27,11 @@ module.exports = grammar({
       choice(
         $.identifier,
         $._literal,
+        $.parenthesized_expression,
         $.unary_expression,
         $.binary_expression,
-        $.update_expression
+        $.update_expression,
+        $.typecast_expression
       ),
     _statement: $ =>
       choice(
@@ -141,8 +143,7 @@ module.exports = grammar({
       prec.left(
         PREC.UPD,
         choice(
-          seq($._lvalue, "++"),
-          seq($._lvalue, "--"),
+          $._postfix_update,
           seq("++", $._lvalue),
           seq("--", $._lvalue),
           seq($._lvalue, "=", $._expression),
@@ -151,6 +152,21 @@ module.exports = grammar({
           seq($._lvalue, "*=", $._expression),
           seq($._lvalue, "/=", $._expression),
           seq($._lvalue, "%=", $._expression)
+        )
+      ),
+    _postfix_update: $ =>
+      prec.left(PREC.UPD, choice(seq($._lvalue, "++"), seq($._lvalue, "--"))),
+
+    typecast_expression: $ =>
+      seq(
+        "(",
+        $.type_name,
+        ")",
+        choice(
+          $.identifier,
+          seq("-", $.identifier),
+          $.parenthesized_expression,
+          alias($._postfix_update, $.update_expression)
         )
       ),
 

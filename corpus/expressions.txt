@@ -53,3 +53,82 @@ foo() {
       (update_expression
         (identifier)
         (integer_literal)))))
+
+============================================
+Typecast expression
+============================================
+
+foo() {
+  (string)bar;
+}
+
+---
+
+(ERROR
+  (function_declaration
+    (identifier)
+    (function_parameters)
+    (statement_block
+      (typecast_expression
+        (type_name)
+        (identifier)))))
+
+============================================
+Typecast with minus
+============================================
+
+foo() {
+  (integer)-PI;
+}
+
+---
+
+(ERROR
+  (function_declaration
+    (identifier)
+    (function_parameters)
+    (statement_block
+      (typecast_expression
+        (type_name)
+        (identifier)))))
+
+============================================
+Typecast with postfix
+============================================
+
+foo() {
+  (integer)foo++;
+}
+
+---
+
+(ERROR
+  (function_declaration
+    (identifier)
+    (function_parameters)
+    (statement_block
+      (typecast_expression
+        (type_name)
+        (update_expression (identifier))))))
+
+============================================
+Typecast with parens
+============================================
+
+foo() {
+  (string)(2 + 2);
+}
+
+---
+
+(ERROR
+  (function_declaration
+    (identifier)
+    (function_parameters)
+    (statement_block
+      (typecast_expression
+        (type_name)
+        (parenthesized_expression
+          (binary_expression
+            (integer_literal)
+            (integer_literal)))))))
