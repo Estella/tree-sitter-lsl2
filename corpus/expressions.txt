@@ -11,7 +11,7 @@ foo() {
 (ERROR
   (function_declaration
     (identifier)
-    (function_parameters)
+    (function_signature)
     (statement_block
       (binary_expression
         (integer_literal)
@@ -30,7 +30,7 @@ foo() {
 (ERROR
   (function_declaration
     (identifier)
-    (function_parameters)
+    (function_signature)
     (statement_block
       (unary_expression
         (integer_literal)))))
@@ -48,7 +48,7 @@ foo() {
 (ERROR
   (function_declaration
     (identifier)
-    (function_parameters)
+    (function_signature)
     (statement_block
       (update_expression
         (identifier)
@@ -67,7 +67,7 @@ foo() {
 (ERROR
   (function_declaration
     (identifier)
-    (function_parameters)
+    (function_signature)
     (statement_block
       (typecast_expression
         (type_name)
@@ -86,7 +86,7 @@ foo() {
 (ERROR
   (function_declaration
     (identifier)
-    (function_parameters)
+    (function_signature)
     (statement_block
       (typecast_expression
         (type_name)
@@ -105,7 +105,7 @@ foo() {
 (ERROR
   (function_declaration
     (identifier)
-    (function_parameters)
+    (function_signature)
     (statement_block
       (typecast_expression
         (type_name)
@@ -124,7 +124,7 @@ foo() {
 (ERROR
   (function_declaration
     (identifier)
-    (function_parameters)
+    (function_signature)
     (statement_block
       (typecast_expression
         (type_name)

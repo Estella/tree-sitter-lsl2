@@ -36,7 +36,7 @@ foo(){}
 (ERROR
   (function_declaration
     (identifier)
-    (function_parameters)
+    (function_signature)
     (statement_block)))
 
 ============================================
@@ -51,7 +51,26 @@ integer foo(){}
   (function_declaration
     (type_name)
     (identifier)
-    (function_parameters)
+    (function_signature)
+    (statement_block)))
+
+============================================
+Function declaration with arguments
+============================================
+
+integer foo(string bar, integer baz){}
+
+---
+
+(ERROR
+  (function_declaration
+    (type_name)
+    (identifier)
+    (function_signature
+      (type_name)
+      (identifier)
+      (type_name)
+      (identifier))
     (statement_block)))
 
 ============================================
@@ -67,7 +86,7 @@ foo() {
 (ERROR
   (function_declaration
     (identifier)
-    (function_parameters)
+    (function_signature)
     (statement_block
       (variable_declaration
         (type_name)

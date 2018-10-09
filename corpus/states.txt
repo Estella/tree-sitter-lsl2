@@ -25,7 +25,7 @@ default {
   (default_state
     (event_block
       (identifier)
-      (function_parameters
+      (function_signature
         (type_name)
         (identifier))
       (statement_block))))
@@ -66,7 +66,7 @@ state foo {
     (identifier)
     (event_block
       (identifier)
-      (function_parameters
+      (function_signature
         (type_name)
         (identifier))
       (statement_block))))

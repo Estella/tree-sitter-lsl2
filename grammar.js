@@ -55,10 +55,10 @@ module.exports = grammar({
       seq(
         optional($.type_name),
         $.identifier,
-        $.function_parameters,
+        $.function_signature,
         $.statement_block
       ),
-    function_parameters: $ =>
+    function_signature: $ =>
       seq("(", commaSeparated(seq($.type_name, $.identifier)), ")"),
     statement_block: $ => seq("{", repeat($._statement), "}"),
 
@@ -100,7 +100,7 @@ module.exports = grammar({
     event_block: $ =>
       seq(
         "{",
-        repeat(seq($.identifier, $.function_parameters, $.statement_block)),
+        repeat(seq($.identifier, $.function_signature, $.statement_block)),
         "}"
       ),
 
