@@ -32,12 +32,10 @@ module.exports = grammar({
         $.update_expression
       ),
     _statement: $ =>
-      prec.right(
-        choice(
-          $.variable_declaration,
-          seq($._expression, ";"),
-          $.return_statement
-        )
+      choice(
+        $.variable_declaration,
+        seq($._expression, ";"),
+        $.return_statement
       ),
 
     variable_declaration: $ =>
